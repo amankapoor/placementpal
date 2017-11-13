@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../views/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../views/css/style.css">
+</head>
+
+<body>
+
+    <!-- main nav -->
+    <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <a class="navbar-brand" href="/"><img src="../views/placementpal-logo.svg" alt="Placement Pal" height="40px"></a>
+    </nav>
+    
+    <div class="container mt-5 col-md-8 col-lg-6" id="register">
+        <h3 class="text-center">Hi {{.}}, Setup Your Account With Us</h3>
+        <hr>
+        <form action="/register" method="post">
+
+            <div class="form-group container">
+                <label for="batch">Batch</label>
+                <select class="form-control" name="batch" id="batch" aria-describedby="batchHelp" required>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                </select>
+                <small id="batchHelp" class="form-text text-muted">Please select correct batch year. You will not be able to change it later.</small>
+            </div>
+
+            <div class="form-group container">
+                <label for="degree">Degree</label>
+                <select class="form-control" name="degree" id="degree" required>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="BBA">BBA</option>
+                    <option value="BCA">BCA</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="BA">BA</option>
+                    <option value="B.Arch">B.Arch</option>
+                    <option value="B.Pharma">B.Pharma</option>
+                    <option value="BFA">BFA</option>
+                    <option value="BPT">BPT</option>
+                    <option value="M.Tech">M.Tech</option>
+                    <option value="MBA">MBA</option>
+                    <option value="MCA">MCA</option>
+                    <option value="M.Sc">M.Sc</option>
+                    <option value="M.Pharma">M.Pharma</option>
+                    <option value="MPT">MPT</option>
+                    <option value="MPH">MPH</option>
+                    <option value="D.Pharmacy">D.Pharmacy</option>
+                </select>
+            </div>
+
+            <div class="form-group container">
+                <label for="college">College</label>
+                <select class="form-control disabled" name="college" id="college" required>
+                    <option value="Amity University">Amity University</option>
+                </select>
+            </div>
+
+            <div class="form-group container">
+                <label for="collegeLocation">College Location</label>
+                <select class="form-control" name="collegeLocation" id="collegeLocation" required>
+                    <option value="Noida">Noida</option>
+                    <option value="Greater Noida">Greater Noida</option>
+                    <option value="Gurgaon">Gurgaon</option>                    
+                    <option value="Lucknow">Lucknow</option>
+                    <option value="Jaipur">Jaipur</option>
+                    <option value="Gwalior">Gwalior</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Kolkata">Kolkata</option>
+                    <option value="Ranchi">Ranchi</option>
+                    <option value="Raipur">Raipur</option>
+                </select>
+            </div>
+
+            <div class="form-group container">
+                <label for="mobile">Mobile Number</label>
+                <div class="input-group mb-2 mb-sm-0">
+                    <div class="input-group-addon">+91</div>
+                    <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="9876543210" maxlength="10" required disabled>
+                </div>
+            </div>
+
+            <div class="form-group container">
+                <label for="otp">OTP</label>
+                <input class="form-control" type="text" name="otp" id="otp" maxlength="4" required disabled>
+            </div>
+
+            <div class="px-3">
+                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">See Your Dashboard</button>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+    <div class="text-center my-4">
+        <h5 class="text-muted">Couldn't find your degree?</h5>
+        <h6 class="text-muted">Write to us at care@placementpal.com</h6>
+    </div>
+    <hr>
+    <div class="text-center my-4 text-muted">
+        <p class="mb-1">Special thanks to</p>
+        <a href="https://msg91.com/startups/?utm_source=startup-banner"><img src="https://msg91.com/images/startups/msg91Badge.png" width="120" height="90" title="MSG91 - SMS for Startups" alt="Bulk SMS - MSG91"></a>
+    </div>
+    
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

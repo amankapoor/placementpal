@@ -1,0 +1,49 @@
+.placement-card {
+    /* box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-radius: 8px;
+    border-bottom: 1px hidden #fff;
+}
+
+#navbar {
+    color: #757575;
+    border-color: rgba(0,0,0,0);
+    outline-color: white;
+}
+
+#subnav {
+    border-radius: 5px;
+    /* border-bottom: 2px solid #1967D2; */
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.subnav-li-a {
+    /* remove underline and change colour to grayand center it */
+    text-decoration: none;
+    color: #757575;
+    /* border-bottom-color: red; */
+}
+
+.card-title {
+    color: #1967D2;
+}
+
+.navbar li a img {
+    height: 40px;
+}
+
+#avatar {
+    border-radius: 100%;
+}
+
+.inlineCheckbox {
+    margin-top: 0;
+}
+
+.edit-degree-badges {
+    font-size: 16px;
+}
+
+.dashboard-num-badges {
+    background-color: #1967D2;
+}

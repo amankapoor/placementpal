@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="../views/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../views/css/style.css">
+</head>
+
+<body>
+
+    <!-- main nav -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+            <a class="navbar-brand" href="/"><img src="../views/placementpal-logo.svg" alt="Placement Pal" height="40px"></a>
+            <button id="navbar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <div class="btn-group">
+                        <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{.user.Avatar}}" alt="" height="40px" width="40px" class="img-fluid" id="avatar">
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+
+                            <div class="card-header">
+                                {{.user.FirstName}} {{.user.LastName}}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text small">{{.user.Email}}</p>
+                                <p class="card-text small">{{.user.Degree}} - {{.user.Batch}}</p>
+                                <p class="card-text small">{{.user.College}}, {{.user.CollegeLocation}}</p>
+
+                                <a href="/logout/gplus" class="btn btn-secondary">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sub nav -->
+    <div id="subnav">
+        <!-- <ul class="nav nav-pills nav-justified nav-fill"> -->
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item subnav-li">
+                <a class="nav-link active subnav-li-a" href="/dashboard">Your Placements</a>
+            </li>
+            <br>
+            <li class="nav-item subnav-li">
+                <a class="nav-link subnav-li-a" href="/dashboard/other">Other Information</a>
+            </li>
+        </ul>
+    </div>
+
+    {{range $k, $v := .placement}}
+    <div class="container col-md-9">
+        <div class="card placement-card my-3">
+            <div class="card-body">
+                <h5 class="card-title">{{.Title}} <span class="badge badge-secondary dashboard-num-badges">#{{add $k 1}}</span></h5>
+                <hr>
+                
+                {{ if .CTC}}
+                <span class="badge badge-pill badge-warning">
+                    CTC: {{.CTC}} LPA
+                </span>
+                {{ end}}   
+                
+                {{ if .DriveDate}}
+                <span class="badge badge-pill badge-success">
+                    Drive Date: {{.DriveDate}}
+                </span>
+                {{ end}}
+                
+                <span>
+                    {{ $length := len .Files }} {{ range $index, $value := .Files }} {{if eq $length 1}}
+                    <a href="http://localhost:8080/files/pdf/{{$value}}" target="_blank" class="badge badge-pill badge-info">PDF</a>
+                    {{else}}
+                    <a href="http://localhost:8080/files/pdf/{{$value}}" target="_blank" class="badge badge-pill badge-info">PDF {{add $index 1}}</a>
+                    {{end}} {{end}}
+                </span>
+            </div>
+        </div>
+        <!-- <br> -->
+    </div>
+    {{end}}
+
+    <div class="text-center my-4">
+        <hr>
+            <h6 class="text-muted">Any trouble?</h6>
+            <p class="text-muted small">Write to us at care@placementpal.com</p>
+    </div>
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

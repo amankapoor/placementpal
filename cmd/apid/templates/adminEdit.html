@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Edit</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/views/css/style.css">
+</head>
+
+<body>
+
+    <!-- main nav -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+            <a class="navbar-brand" href="/"><img src="../views/placementpal-logo.svg" alt="Placement Pal" height="40px"></a>
+            <button id="navbar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <div class="btn-group">
+                        <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{.user.Avatar}}" alt="" height="40px" width="40px" class="img-fluid" id="avatar">
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+
+                            <div class="card-header">
+                                {{.user.FirstName}} {{.user.LastName}}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text small">{{.user.Email}}</p>
+                                <p class="card-text small">{{.user.Degree}} - {{.user.Batch}}</p>
+                                <p class="card-text small">{{.user.College}}, {{.user.CollegeLocation}}</p>
+
+                                <a href="/logout/gplus" class="btn btn-secondary">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container col-md-9">
+        <div class="card placement-card my-3">
+            <div class="card-body">
+                <h5 class="card-title">{{.placement.Title}}
+                    {{if .placement.IsReviewed}}
+                    {{else}}
+                    <span class="badge badge-secondary">TBR</span>
+                    {{end}}
+                </h5>
+                <hr>
+                <div>
+                    {{ $length := len .placement.Files }}
+                        {{ range $index, $value := .placement.Files }}
+                            {{if eq $length 1}}
+                            <a href="http://localhost:8080/files/pdf/{{$value}}" target="_blank" class="badge badge-pill badge-info">PDF</a>
+                            {{else}}
+                            <a href="http://localhost:8080/files/pdf/{{$value}}" target="_blank" class="badge badge-pill badge-info">PDF {{add $index 1}}</a>
+                        {{end}} 
+                    {{end}}
+                    
+                    
+                </div>
+                <div>
+                        {{ range $index, $value := .placement.Degrees }}
+                        <a href=# target="_blank" class="badge badge-pill badge-secondary">{{$value}}</a>
+                        {{end}}
+                </div>
+                <div>
+                    {{ range $index, $value := .placement.Batches }}
+                    <a href=# target="_blank" class="badge badge-pill badge-primary">{{$value}}</a>
+                    {{end}}
+                </div>
+
+                <div>
+                        {{ if .CTC}}
+                        <span class="badge badge-pill badge-warning">
+                            CTC: {{.CTC}} LPA
+                        </span>
+                        {{ end}}   
+                </div>
+             
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h3 class="text-center">Edit Details</h3>
+        <form action="/admin/edit/{{.placement.URL}}" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                      <label for="">EID</label>
+                      <input type="text" class="form-control" name="eid" id="eid" aria-describedby="helpId" value="{{.placement.URL}}" readonly>
+                    </div>
+                </div>   
+
+                <div class="form-group">
+                    <h5>Degrees</h5>
+                    <div class="edit-degree-badges custom-controls-stacked d-block">
+                            {{range $k, $v := .degrees}}
+                            <label class="custom-control custom-checkbox my-3">
+                                <input class="custom-control-input" type="checkbox" value="{{$v}}" name="degrees">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">{{$v}}</span>
+                            </label>
+                            {{end}}
+                    </div>
+                </div>                    
+                    
+
+<!-- original below -->
+
+                    <!-- <h5>Degrees</h5>
+                    {{range $k, $v := .degrees}}
+                    <div class="form-check form-check-inline badge badge-light edit-degree-badges">
+                            <label class="form-check-label">
+                            <input class="form-check-input inlineCheckbox degreeCheckbox" type="checkbox" value="{{$v}}" name="degrees"> {{$v}}
+                            </label>
+                    </div>
+                    {{end}}
+                </div>           -->
+        
+                <div class="form-group">
+                    <h5>Batch</h5>
+                    <div class="custom-controls-stacked d-block">
+                    
+                        <label class="custom-control custom-checkbox my-3">
+                            <input class="custom-control-input" type="checkbox" id="inlineCheckbox3" value="2017" name="batch">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">2017 (Graduate)</span>
+                        </label>
+                    
+                        <label class="custom-control custom-checkbox my-3">
+                            <input class="custom-control-input" type="checkbox" id="inlineCheckbox3" value="2018" name="batch">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">2018 (4th Year)</span>
+                        </label>
+                    
+                        <label class="custom-control custom-checkbox my-3">
+                            <input class="custom-control-input" type="checkbox" id="inlineCheckbox3" value="2019" name="batch">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">2019 (3rd Year)</span>
+                        </label>
+                    
+                        <label class="custom-control custom-checkbox my-3">
+                            <input class="custom-control-input" type="checkbox" id="inlineCheckbox3" value="2020" name="batch">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">2020 (2nd Year)</span>
+                        </label>
+                    
+                        <label class="custom-control custom-checkbox my-3">
+                            <input class="custom-control-input" type="checkbox" id="inlineCheckbox3" value="2021" name="batch">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">2021 (1st Year)</span>
+                        </label>
+                    </div>
+
+                    <!-- <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="2018" name="batch"> 2018 (4th Year)
+                            </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2019" name="batch"> 2019 (3rd Year)
+                            </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2020" name="batch"> 2020 (2nd Year)
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2021" name="batch"> 2021 (1st Year)
+                        </label>
+                    </div>
+                </div> -->
+                </div>
+
+                <div class="form-group">
+                    <h5>CTC</h5>
+                    <input type="text" class="form-control" name="ctc">
+                </div>
+
+                <div class="form-group">
+                        <h5>Drive Date</h5>
+                        <input type="date" class="form-control" name="driveDate">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

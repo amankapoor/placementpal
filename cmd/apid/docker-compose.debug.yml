@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  placementpal:
+    image: placementpal
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - 8080:8080

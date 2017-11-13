@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+  placementpal:
+    image: placementpal
+    build: .
+    ports:
+      - 8080:8080
+    environment: 
+      HOST: 8082
+      DB_HOST: localhost:27017
